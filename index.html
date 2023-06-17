@@ -23,7 +23,8 @@
                 <a onclick="startGame()">Dynamic<br>
                 Paddle</a>
             </h1>
-            <h4 style="position: absolute; bottom: 0; right: 0;">Dynamic_Paddle <a style="color: black; text-decoration: none;" onclick="openInformation()">V1.3</a></h4>
+            <h4 style="position: absolute; bottom: 0; right: 0;">Dynamic_Paddle 
+                <a style="color: black; text-decoration: none;" onclick="openInformation()">V1.4</a></h4>
         </header>
 
         <score id="score" class="hidden"
@@ -63,7 +64,7 @@
             <h4 style="width: 75%; margin-block: 8px;">"Dynamic Paddle" is an immersive pong-style game where your paddle dynamically tilts based on your movements, bringing a new level of excitement to the classic arcade experience. 
                 Test your reflexes and strategic thinking as you aim for the highest score by skillfully bouncing the ping pong ball off the dynamic paddle and walls, strategically aiming for maximum vertical distance.</h4>
             <h3 style="margin: 8px;"><a onclick="returnToBeginning()">Return To The Game</a></h3>
-            <h4 class="light">Dynamic_Paddle V1.3</h4>
+            <h4 class="light">Dynamic_Paddle V1.4</h4>
         </information>
 
         <ball id="ball"
@@ -84,13 +85,47 @@
             </svg>
         </ball>
 
+        <ballFlag id="ballFlag" class="hidden"
+        style="position: absolute; left: calc(50dvw - 50px); top: -30px;">
+            <svg
+            width="100" height="100"
+            style="position: absolute; top: 3px;">
+                <rect
+                x="35px" y="35px" rx="5" ry="5" width="30" height="30"
+                style="transform-origin: center; rotate: 0deg;
+                fill: lightgray;"/>
+            </svg>
+            <svg
+            width="100" height="100"
+            style="position: absolute; top: 0px;">
+                <rect
+                x="35px" y="35px" rx="5" ry="5" width="30" height="30"
+                style="transform-origin: center; rotate: 0deg;
+                fill: gray;"/>
+            </svg>
+            <svg
+            width="100" height="100"
+            style="position: absolute; top: 3px;">
+                <circle
+                cx="50" cy="50" r="10"
+                style="fill: gray"/>
+            </svg>
+            <svg
+            width="100" height="100"
+            style="position: absolute; top: 0px;">
+                <circle
+                cx="50" cy="50" r="10"
+                style="fill: black"/>
+            </svg>
+        </ballFlag>
+
         <paddle id="paddle"
         style="position: absolute; left: calc(50dvw - 100px); top: calc(75dvh - 50px);">
             <svg
             width="200" height="100"
             style="position: absolute; top: 3px;">
                 <rect id="paddle_back"
-                x="50px" y="40" rx="10" ry="10" width="100" height="20"
+                x="50px" y="40px" rx="10" ry="10" width="100" height="20"
                 style="transform-origin: center; rotate: 0deg;
                 fill: grey;"/>
             </svg>
@@ -104,7 +139,7 @@
             </svg>
         </paddle>
 
-        <footer
+        <footer id="footer"
         style="position: absolute; bottom: 0; margin: 4px;">
             <h4>Created by <a style="color: black; text-decoration: none;" href="https://alwyn-t.github.io" target="_blank">Alwyn</a><br>
             Licensed under <a style="color: black; text-decoration: none;" href="https://github.com/alwyn-t/Dynamic_Paddle/blob/main/LICENSE" target="_blank">AGPL-3.0 license</a></h4>

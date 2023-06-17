@@ -21,6 +21,7 @@ let paddle_back = document.getElementById("paddle_back");
 let ball = document.getElementById("ball");
 let ballVX = 0;
 let ballVY = -15;
+let ballFlag = document.getElementById("ballFlag");
 
 let mouseX, mouseY, prevMouseX = document.clientY, prevMouseY = document.clientX;
 
@@ -37,6 +38,7 @@ let score = document.getElementById("score");
 let pause = document.getElementById("pause");
 let final = document.getElementById("final");
 let information = document.getElementById("information");
+let footer = document.getElementById("footer");
 let startGameTrigger = true;
 function startGame(){
     if(startGameTrigger){
@@ -69,6 +71,8 @@ function startGame(){
         ball.classList = "visible";
         paddle.classList = "visible";
 
+        footer.classList = "disableFooter";
+
         setTimeout(() => {
             startGameTrigger = true;
         }, 750);
@@ -86,12 +90,14 @@ function resumeGameLoop(){
     pause.classList = "hidden";
     gamePaused = false;
     gameTrigger = setInterval(gameLoop, 10);
+    footer.classList = "disableFooter";
 }
 function pauseGameLoop(){
     score.classList = "hidden";
     pause.classList = "visible";
     gamePaused = true;
     clearInterval(gameTrigger);
+    footer.classList = "";
 }
 function endGameLoop(){
     // save scores and display end screen
@@ -105,6 +111,7 @@ function endGameLoop(){
         gameHighScore = Math.ceil(gameScore);
         setCookie("highscore", gameHighScore, 365);
     }
+    footer.classList = "";
 }
 
 function returnToBeginning(){
@@ -136,7 +143,7 @@ function updateScore(){
         final.children[1].innerHTML = "Final Score (Highest: "+gameHighScore+")"
         final.children[2].innerHTML = Math.ceil(gameScore);
     }
-    final.children[3].innerHTML = "{B:"+2*gameBounces+" H:"+0.005*Math.floor(gameHorizontal)+" V:"+0.001*Math.floor(gameVertical)+"}";
+    final.children[3].innerHTML = "{B:"+2*gameBounces+" H:"+(0.005*gameHorizontal).toFixed(1)+" V:"+(0.001*gameVertical).toFixed(1)+"}";
 }
 
 function timeLoop(){
@@ -178,10 +185,12 @@ document.onmousemove = function(event){
 document.ontouchmove = function(event){
     // solution by AndersDaniel
     // https://stackoverflow.com/questions/8050644/how-do-i-get-real-time-position-of-finger-as-it-moves-from-left-to-right
-    event.preventDefault();
-    event.stopPropagation();
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+    // event.preventDefault();
+    // event.stopPropagation();
+    // solution adjusted based on w3schools.com
+    // https://www.w3schools.com/jsref/event_touchmove.asp
+    mouseX = event.touches[0].clientX;
+    mouseY = event.touches[0].clientY;
 }
 
 document.onmouseover = function(){
@@ -225,6 +234,13 @@ function setBall(x, y){
     if(!isNaN(x) && isFinite(x) && !isNaN(y) && isFinite(y)){
         let ballStyle = "position: absolute; left: "+x+"px; top: "+y+"px;";
         ball.style = ballStyle;
+        let ballFlagStyle = "position: absolute; left: "+x+"px; top: -30px;";
+        ballFlag.style = ballFlagStyle;
+        if(y<-50){
+            ballFlag.classList = "visible";
+        }else{
+            ballFlag.classList = "hidden";
+        }
     }
 }
 
@@ -246,9 +262,9 @@ function physics(x, y){
     }else{
         paddleFX = 0.3*diffX + paddleX;
         if(diffX > 0){
-            rot = Math.min(0.5*diffX, 30);
+            rot = constrain(2, 0.5*diffX, 30);
         }else{
-            rot = Math.max(0.5*diffX, -30);
+            rot = constrain(-30, 0.5*diffX, -2);
         }
     }
     let paddleY = parseInt(paddle.style.top)+50;
@@ -268,9 +284,9 @@ function physics(x, y){
     if(isNaN(ballY)){ ballY = height/4; }
     // calculate next frame ball position
     if(ballVX>0.05){
-        ballVX-=0.05;
+        ballVX = ballVX + Math.min(0.05, 0.05*ballVX);
     }else if(ballVX<0.05){
-        ballVX+=0.05;
+        ballVX = ballVX + Math.max(-0.05, 0.05*ballVX);
     }
     ballVY += 0.5;
     if(ballVY < -25){
