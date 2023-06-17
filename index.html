@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Dynamic Paddle</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body
+    style="margin: 0; overflow: hidden;">
+
+        <header id="title"
+        style="position: absolute; height: 100dvh; width: 100dvw; top: 0; left: 0;
+        display: flex; align-items: center; justify-content: center;">
+            <h1 class="visible"
+            style="text-align: center;">
+                <a onclick="startGame()">Dynamic<br>
+                Paddle</a>
+            </h1>
+        </header>
+
+        <score id="score" class="hidden"
+        style="position: absolute; height: 100dvh; width: 100dvw; top: 0; left: 0;
+        display: flex; align-items: center; justify-content: top; flex-direction: column;">
+            <h2>0</h2>
+            <h3>0:00.00</h3>
+        </score>
+
+        <pause id="pause" class="hidden"
+        style="position: absolute; height: 100dvh; width: 100dvw; top: 0; left: 0;
+        display: flex; align-items: center; justify-content: center; flex-direction: column;">
+            <h2 class="light">Time Stop</h2>
+            <h3>0</h3>
+            <h4>0:00.00</h4>
+        </pause>
+
+        <final id="final" class="hidden"
+        style="position: absolute; height: 100dvh; width: 100dvw; top: 0; left: 0;
+        display: flex; align-items: center; justify-content: center; flex-direction: column;">
+            <h2 class="light">The Ball Has Been Dropped</h2>
+            <h4 class="light">Final Score</h4>
+            <h3>0</h3>
+            <h4 class="light">{}</h4>
+            <h3>0:00.00</h3>
+            <a onclick="startGame()"><h2>Find The Ball</h2></a>
+            <a onclick="returnToBeginning()"><h3>From The Start</h3></a>
+        </final>
+
+        <ball id="ball"
+        style="position: absolute; left: calc(50dvw - 50px); top: calc(25dvh - 50px);">
+            <svg
+            width="100" height="100"
+            style="position: absolute; top: 3px;">
+                <circle
+                cx="50" cy="50" r="10"
+                style="fill: grey"/>
+            </svg>
+            <svg
+            width="100" height="100"
+            style="position: absolute; top: 0px;">
+                <circle
+                cx="50" cy="50" r="10"
+                style="fill: black"/>
+            </svg>
+        </ball>
+
+        <paddle id="paddle"
+        style="position: absolute; left: calc(50dvw - 100px); top: calc(75dvh - 50px);">
+            <svg
+            width="200" height="100"
+            style="position: absolute; top: 3px;">
+                <rect id="paddle_back"
+                x="50px" y="40" rx="10" ry="10" width="100" height="20"
+                style="transform-origin: center; rotate: 0deg;
+                fill: grey;"/>
+            </svg>
+            <svg
+            width="200" height="100"
+            style="position: absolute; top: 0px;">
+                <rect id="paddle_front"
+                x="50px" y="40px" rx="10" ry="10" width="100" height="20"
+                style="transform-origin: center; rotate: 0deg;
+                fill: black;"/>
+            </svg>
+        </paddle>
+
+        <footer
+        style="position: absolute; bottom: 0; margin: 4px;">
+            <h4>Created by <a style="color: black; text-decoration: none;" href="https://alwyn-t.github.io" target="_blank">Alwyn</a><br>
+            Licensed under <a style="color: black; text-decoration: none;" href="https://github.com/alwyn-t/Dynamic_Paddle/blob/main/LICENSE" target="_blank">AGPL-3.0 license</a></h4>
+        </footer>
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+        <script src="scripts.js" async defer></script>
+    </body>
+</html>
