@@ -157,6 +157,14 @@ document.onmousemove = function(event){
     mouseX = event.clientX;
     mouseY = event.clientY;
 }
+document.ontouchmove = function(event){
+    // solution by AndersDaniel
+    // https://stackoverflow.com/questions/8050644/how-do-i-get-real-time-position-of-finger-as-it-moves-from-left-to-right
+    event.preventDefault();
+    event.stopPropagation();
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+}
 
 document.onmouseover = function(){
     if(gameActive && !pauseUsingEscape && pauseOnReturn && gamePaused){
@@ -396,7 +404,7 @@ function log(val){
     console.log(val);
 }
 
-// following cookie functions are from w3schools.com and modified to have SameSite attributes
+// following cookie functions are from w3schools.com
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
