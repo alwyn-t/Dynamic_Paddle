@@ -59,6 +59,8 @@ function startGame(){
     
     ball.style = "position: absolute; left: calc(50dvw - 50px); top: calc(25dvh - 50px);";
     paddle.style = "position: absolute; left: calc(50dvw - 100px); top: calc(75dvh - 50px);";
+    paddle_back.style.rotate = "0deg";
+    paddle_front.style.rotate = "0deg";
     ball.classList = "visible";
     paddle.classList = "visible";
 }
@@ -100,6 +102,8 @@ function returnToBeginning(){
     title.classList = "visible";
     ball.style = "position: absolute; left: calc(50dvw - 50px); top: calc(25dvh - 50px);";
     paddle.style = "position: absolute; left: calc(50dvw - 100px); top: calc(75dvh - 50px);";
+    paddle_back.style.rotate = "0deg";
+    paddle_front.style.rotate = "0deg";
     ball.classList = "visible";
     paddle.classList = "visible";
 }
