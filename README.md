@@ -1,2 +1,8 @@
 # Dynamic_Paddle
-My take on the classic pong game
+'Dynamic Paddle' is a unique pong-style game that introduces a whole new level of excitement to the classic arcade experience. In this game, your paddle comes to life as it dynamically tilts based on your movements, creating a truly immersive gameplay experience. Get ready to test your reflexes, precision, and strategic thinking as you aim to achieve the highest score possible by skillfully bouncing the ping pong ball off the paddle and walls while strategically aiming for maximum vertical distance.
+
+## Gameplay
+In "Dynamic Paddle," your primary objective is to keep the ping pong ball airborne by bouncing it off your dynamic paddle. As you move the paddle around on the game screen, it will tilt its angle to match your movements, adding an extra layer of challenge and precision to the game.
+To control the paddle, you can use either touch controls or mouse controls, depending on your device. You can earn points by successfully bouncing the ball off your paddle and the walls. The higher the ball bounces vertically, the more points you'll accumulate. However, here's where the game gets really exciting: you can also score bonus points by hitting the ball horizontally. It's a risk-reward mechanism that encourages daring gameplay and adds an element of strategy.
+Beware, though, as missing the ball or letting it touch the bottom of the screen will result in the game ending. Your final score will be determined by the total points accumulated throughout your gameplay.
+"Dynamic Paddle" offers addictive, fast-paced gameplay, stunning visuals, and a unique control system that will keep you engaged for hours on end. Challenge your friends, compete for high scores, and become a master of the dynamic paddle in this thrilling arcade experience!
