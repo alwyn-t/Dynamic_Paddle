@@ -36,33 +36,43 @@ let title = document.getElementById("title");
 let score = document.getElementById("score");
 let pause = document.getElementById("pause");
 let final = document.getElementById("final");
+let information = document.getElementById("information");
+let startGameTrigger = true;
 function startGame(){
-    title.classList = "hidden";
-    final.classList = "hidden";
-    gameTime = 0;
-    gameScore = 0;
-    gameHighScore = getCookie("highscore");
-    if(!isFinite(gameHighScore)){
-        gameHighScore = 0;
+    if(startGameTrigger){
+        startGameTrigger = false;
+
+        title.classList = "hidden";
+        final.classList = "hidden";
+        gameTime = 0;
+        gameScore = 0;
+        gameHighScore = getCookie("highscore");
+        if(!isFinite(gameHighScore)){
+            gameHighScore = 0;
+        }
+        gameBounces = 0;
+        gameHorizontal = 0;
+        gameVertical = 0;
+        ballVX = 0;
+        ballVY = -15;
+        setTimeout(() => {
+            gameActive = true;
+            gamePaused = false;
+            startGameLoop();
+            score.classList = "visible";
+        }, 500);
+
+        ball.style = "position: absolute; left: calc(50dvw - 50px); top: calc(25dvh - 50px);";
+        paddle.style = "position: absolute; left: calc(50dvw - 100px); top: calc(75dvh - 50px);";
+        paddle_back.style.rotate = "0deg";
+        paddle_front.style.rotate = "0deg";
+        ball.classList = "visible";
+        paddle.classList = "visible";
+
+        setTimeout(() => {
+            startGameTrigger = true;
+        }, 750);
     }
-    gameBounces = 0;
-    gameHorizontal = 0;
-    gameVertical = 0;
-    ballVX = 0;
-    ballVY = -15;
-    setTimeout(() => {
-        gameActive = true;
-        gamePaused = false;
-        startGameLoop();
-        score.classList = "visible";
-    }, 500);
-    
-    ball.style = "position: absolute; left: calc(50dvw - 50px); top: calc(25dvh - 50px);";
-    paddle.style = "position: absolute; left: calc(50dvw - 100px); top: calc(75dvh - 50px);";
-    paddle_back.style.rotate = "0deg";
-    paddle_front.style.rotate = "0deg";
-    ball.classList = "visible";
-    paddle.classList = "visible";
 }
 
 function startGameLoop(){
@@ -92,13 +102,14 @@ function endGameLoop(){
     ball.classList = "hidden";
     paddle.classList = "hidden";
     if(gameScore > gameHighScore){
-        gameHighScore = Math.floor(gameScore);
+        gameHighScore = Math.ceil(gameScore);
         setCookie("highscore", gameHighScore, 365);
     }
 }
 
 function returnToBeginning(){
     final.classList = "hidden";
+    information.classList = "hidden";
     title.classList = "visible";
     ball.style = "position: absolute; left: calc(50dvw - 50px); top: calc(25dvh - 50px);";
     paddle.style = "position: absolute; left: calc(50dvw - 100px); top: calc(75dvh - 50px);";
@@ -108,17 +119,24 @@ function returnToBeginning(){
     paddle.classList = "visible";
 }
 
+function openInformation(){
+    title.classList = "hidden";
+    ball.classList = "hidden";
+    paddle.classList = "hidden";
+    information.classList = "visible";
+}
+
 function updateScore(){
     gameScore = 2*gameBounces + 0.005*gameHorizontal + 0.001*gameVertical;
-    score.firstElementChild.innerHTML = Math.floor(gameScore);
-    pause.children[1].innerHTML = Math.floor(gameScore);
+    score.firstElementChild.innerHTML = Math.ceil(gameScore);
+    pause.children[1].innerHTML = Math.ceil(gameScore);
     if(gameScore > gameHighScore){
-        final.children[2].innerHTML = Math.floor(gameScore)+"★";
+        final.children[2].innerHTML = Math.ceil(gameScore)+"★";
     }else{
         final.children[1].innerHTML = "Final Score (Highest: "+gameHighScore+")"
-        final.children[2].innerHTML = Math.floor(gameScore);
+        final.children[2].innerHTML = Math.ceil(gameScore);
     }
-    final.children[3].innerHTML = "{B:"+gameBounces+" H:"+Math.floor(gameHorizontal)+" V:"+Math.floor(gameVertical)+"}";
+    final.children[3].innerHTML = "{B:"+2*gameBounces+" H:"+0.005*Math.floor(gameHorizontal)+" V:"+0.001*Math.floor(gameVertical)+"}";
 }
 
 function timeLoop(){
@@ -290,7 +308,15 @@ function physics(x, y){
         if(paddleFY-paddleY<=0){
             ballVY = 5*(paddleFY - paddleY) - 0.9*Math.abs(ballVY);
         }
-        ballVX = rot;
+        if(rot==0){
+            if(ballX>paddleX){
+                ballVX = 2;
+            }else{
+                ballVX = -2;
+            }
+        }else{
+            ballVX = rot;
+        }
         gameBounces += 1;
     }
     // update ball next frame if needed

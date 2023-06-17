@@ -23,6 +23,7 @@
                 <a onclick="startGame()">Dynamic<br>
                 Paddle</a>
             </h1>
+            <h4 style="position: absolute; bottom: 0; right: 0;">Dynamic_Paddle <a style="color: black; text-decoration: none;" onclick="openInformation()">V1.3</a></h4>
         </header>
 
         <score id="score" class="hidden"
@@ -51,6 +52,19 @@
             <a onclick="startGame()"><h2>Find The Ball</h2></a>
             <a onclick="returnToBeginning()"><h3>From The Start</h3></a>
         </final>
+
+        <information id="information" class="hidden"
+        style="position: absolute; height: 100dvh; width: 100dvw; top: 0; left: 0;
+        display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center;
+        overflow-y: auto;">
+            <h2>Game Information</h2>
+            <h4 style="width: 75%; margin-block: 8px;" class="light">Designed and coding by <a style="color: black; text-decoration: none;" href="https://github.com/alwyn-t" target="_blank">Alwyn</a></h4>
+            <h4 style="width: 75%; margin-block: 8px;" class="light">Play Tester: <a style="color: black; text-decoration: none;" href="https://github.com/dt-7148" target="_blank">Jonah</a></h4>
+            <h4 style="width: 75%; margin-block: 8px;">"Dynamic Paddle" is an immersive pong-style game where your paddle dynamically tilts based on your movements, bringing a new level of excitement to the classic arcade experience. 
+                Test your reflexes and strategic thinking as you aim for the highest score by skillfully bouncing the ping pong ball off the dynamic paddle and walls, strategically aiming for maximum vertical distance.</h4>
+            <h3 style="margin: 8px;"><a onclick="returnToBeginning()">Return To The Game</a></h3>
+            <h4 class="light">Dynamic_Paddle V1.3</h4>
+        </information>
 
         <ball id="ball"
         style="position: absolute; left: calc(50dvw - 50px); top: calc(25dvh - 50px);">
