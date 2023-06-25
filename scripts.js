@@ -1,6 +1,8 @@
 let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
+let darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 let gameTime = 0;
 let gameScore = 0;
 let gameBounces = 0;
@@ -28,9 +30,7 @@ let mouseX, mouseY, prevMouseX = document.clientY, prevMouseY = document.clientX
 let timeTrigger;
 let gameTrigger;
 window.onload = function(){
-    // startGame();
-    // console.log("onload");
-    // startGameLoop();
+    updateMode();
 }
 
 let title = document.getElementById("title");
@@ -103,7 +103,7 @@ function endGameLoop(){
     // save scores and display end screen
     final.classList = "visible";
     score.classList = "hidden"
-    clearInterval(gameTime);
+    clearInterval(timeTrigger);
     clearInterval(gameTrigger);
     ball.classList = "hidden";
     paddle.classList = "hidden";
@@ -183,11 +183,7 @@ document.onmousemove = function(event){
     mouseY = event.clientY;
 }
 document.ontouchmove = function(event){
-    // solution by AndersDaniel
-    // https://stackoverflow.com/questions/8050644/how-do-i-get-real-time-position-of-finger-as-it-moves-from-left-to-right
-    // event.preventDefault();
-    // event.stopPropagation();
-    // solution adjusted based on w3schools.com
+    // solution based on w3schools.com
     // https://www.w3schools.com/jsref/event_touchmove.asp
     mouseX = event.touches[0].clientX;
     mouseY = event.touches[0].clientY;
@@ -468,4 +464,18 @@ function setCookie(cname, cvalue, exdays) {
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function toggleMode(){
+    darkMode = !darkMode;
+    updateMode();
+}
+function updateMode(){
+    if(darkMode){
+        document.body.classList = "dark-mode";
+        document.getElementById("toggle").innerHTML = "light_mode";
+    }else{
+        document.body.classList = "";
+        document.getElementById("toggle").innerHTML = "dark_mode";
+    }
 }

@@ -8,23 +8,38 @@ body{
     -ms-user-select: none;          /* Internet Explorer/Edge */
     user-select: none;              /* Non-prefixed version, currently 
                                     supported by Chrome, Edge, Opera and Firefox */
+    --black: rgb(15, 15, 15);
+    --gray: rgb(120, 120, 120);
+    --light-gray: rgb(200, 200, 200);
+    --white: rgb(240, 240, 240);
+    background-color: var(--white);
+    color: var(--black);
 }
+@media (prefers-color-scheme: dark) {
+}
+.dark-mode{
+    --black: rgb(240, 240, 240);
+    --gray: rgb(120, 120, 120);
+    --light-gray: rgb(80, 80, 80);
+    --white: rgb(15, 15, 15);
+}
+
 h1{font-size: 72pt;}
 h2{font-size: 48pt; margin-top: 16px; margin-bottom: 0;}
 score h2{
-    color: gray; text-shadow: 0 3px lightgray;}
+    color: var(--gray); text-shadow: 0 3px var(--light-gray);}
 h3{font-size: 32pt; margin-block: 0px;}
 score h3{
-    color: gray; text-shadow: 0 3px lightgray;}
+    color: var(--gray); text-shadow: 0 3px var(--light-gray);}
 h4{font-size: 24px; margin: 0}
 header h4{
-    color: gray; text-shadow: 0 3px lightgray;}
+    color: var(--gray); text-shadow: 0 3px var(--light-gray);}
 footer h4{
-    color: gray; text-shadow: 0 3px lightgray;}
+    color: var(--gray); text-shadow: 0 3px var(--light-gray);}
 h5{font-size: 20px; margin: 0}
 
 .light{
-    color: gray; text-shadow: 0 3px lightgray;}
+    color: var(--gray); text-shadow: 0 3px var(--light-gray);}
 
 a{
     opacity: 1;
